@@ -9,6 +9,7 @@ import CartDrawer from "./components/cart/CartDrawer"; // Importamos el Drawer
 // Estilos globales de Tailwind v4
 import "./index.css";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import Footer from "./components/layout/Footer";
 
 function App() {
   // Estado para controlar si el carrito está abierto o cerrado
@@ -32,6 +33,7 @@ function App() {
             isOpen={isCartOpen}
             onClose={() => setIsCartOpen(false)}
           />
+          <Footer />
         </div>
       </Router>
     </CartProvider>

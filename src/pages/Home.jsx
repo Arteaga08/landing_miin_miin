@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { productos } from "../data/products";
 import ProductCard from "../components/products/ProductCard";
+import { Search, X } from "lucide-react"; // Importamos iconos
 
 const Home = () => {
   const [filtro, setFiltro] = useState("todos");
+  const [busqueda, setBusqueda] = useState(""); // Nuevo estado para el buscador
 
-  const filtered = productos.filter((p) =>
-    filtro === "todos" ? true : p.categoria === filtro,
-  );
+  // Lógica de filtrado combinada (Categoría + Nombre)
+  const filtered = productos.filter((p) => {
+    const cumpleFiltro = filtro === "todos" ? true : p.categoria === filtro;
+    const cumpleBusqueda = p.nombre
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
+    return cumpleFiltro && cumpleBusqueda;
+  });
 
   const categorias = [
     { id: "todos", nombre: "Todos" },
@@ -28,12 +35,34 @@ const Home = () => {
         <h2 className="text-4xl md:text-6xl font-black text-mun-pink uppercase tracking-tighter italic leading-none">
           Miin Miin
         </h2>
-        <p className="text-black/50 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] pt-4">
-          Encuentra la rutina perfecta para tu piel
-        </p>
       </div>
 
-      {/* FILTROS: Carrusel Horizontal en móvil / Centrado en PC */}
+      {/* BUSCADOR ESTILIZADO */}
+      <div className="max-w-md mx-auto mb-8 relative">
+        <div className="relative group">
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-black/30 group-focus-within:text-mun-pink transition-colors"
+            size={20}
+          />
+          <input
+            type="text"
+            placeholder="BUSCAR PRODUCTO..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            className="w-full bg-white border-2 border-black py-4 pl-12 pr-12 rounded-full font-black uppercase text-[10px] tracking-[0.2em] shadow-[4px_4px_0px_0px_#000000] focus:outline-none focus:shadow-none focus:translate-x-1 focus:translate-y-1 transition-all placeholder:text-black/20"
+          />
+          {busqueda && (
+            <button
+              onClick={() => setBusqueda("")}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-black/40 hover:text-black"
+            >
+              <X size={18} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* FILTROS: Carrusel Horizontal */}
       <div className="relative mb-16">
         <div className="flex overflow-x-auto md:justify-center gap-3 pb-6 px-2 scrollbar-hide snap-x">
           {categorias.map((cat) => (
@@ -50,8 +79,6 @@ const Home = () => {
             </button>
           ))}
         </div>
-
-        {/* Gradiente sutil para indicar que hay más (Solo móvil) */}
         <div className="absolute right-0 top-0 h-full w-12 bg-linear-to-l from-white to-transparent pointer-events-none md:hidden"></div>
       </div>
 
@@ -64,9 +91,18 @@ const Home = () => {
         </div>
       ) : (
         <div className="text-center py-20 border-4 border-dashed border-black/10 rounded-3xl">
-          <p className="text-black/40 font-black uppercase tracking-tighter text-2xl">
-            Próximamente más productos...
+          <p className="text-black/40 font-black uppercase tracking-tighter text-xl">
+            No encontramos lo que buscas...
           </p>
+          <button
+            onClick={() => {
+              setBusqueda("");
+              setFiltro("todos");
+            }}
+            className="mt-4 text-mun-pink font-black uppercase text-xs underline"
+          >
+            Limpiar filtros
+          </button>
         </div>
       )}
     </main>

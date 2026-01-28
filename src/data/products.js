@@ -84,7 +84,7 @@ export const productos = [
     nombre: "Mixsoon - Bean Essence - 50ml",
     categoria: "todo_tipo",
     descripcionCorta:
-      "Limina las células muertas de la piel y controla el sebo para una piel perfecta",
+      "Elimina las células muertas de la piel y controla el sebo para una piel perfecta",
     paraQueSirve:
       "Protege de rayos UVA/UVB con extractos de arroz y probióticos.",
     comoUsar: `
