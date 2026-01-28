@@ -1,27 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react"; // Añadimos useState
 import { CartProvider } from "./context/CartContext";
 import Navbar from "./components/layout/Navbar";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
+import CartDrawer from "./components/cart/CartDrawer"; // Importamos el Drawer
 
 // Estilos globales de Tailwind v4
 import "./index.css";
+import ScrollToTop from "./components/utils/ScrollToTop";
 
 function App() {
+  // Estado para controlar si el carrito está abierto o cerrado
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <CartProvider>
       <Router>
-        <div className="min-h-screen bg-mun-pink-bg font-sans selection:bg-mun-coral selection:text-white">
-          <Navbar />
-          <Routes>
-            {/* Página principal con filtros */}
-            <Route path="/" element={<Home />} />
+        <ScrollToTop />
+        {/* Pasamos la función setIsCartOpen al Navbar para que el botón funcione */}
+        <div className="min-h-screen bg-mun-bg font-sans selection:bg-mun-pink selection:text-white">
+          <Navbar onOpenCart={() => setIsCartOpen(true)} />
 
-            {/* Página individual de producto */}
+          <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/producto/:id" element={<ProductDetail />} />
           </Routes>
 
-          {/* Aquí podrías agregar un Footer después */}
+          {/* Componente del Carrito Deslizable */}
+          <CartDrawer
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+          />
         </div>
       </Router>
     </CartProvider>
