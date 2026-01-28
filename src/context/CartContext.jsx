@@ -34,12 +34,24 @@ export const CartProvider = ({ children }) => {
   };
 
   const sendWhatsApp = () => {
-    const phone = "521234567890"; // Reemplaza con tu número real
-    const items = cart.map((i) => `- ${i.quantity}x ${i.nombre}`).join("%0A");
-    //const total = cart.reduce((acc, i) => acc + i.precio * i.quantity, 0);
-    const message = `Hola Mün MIIN! ✨%0AQuisiera pedir los siguientes productos:%0A${items}%0A%0ATotal: $${total.toFixed(2)}`;
+    const telefono = "526181473443"; // Reemplaza con tu número
 
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    const encabezado =
+      "¡Hola Miinn Miin! ✨ Me gustaría cotizar la disponibilidad de estos productos:\n\n";
+
+    // Solo enviamos nombre y cantidad
+    const listaProductos = cart
+      .map((item) => {
+        return `- ${item.nombre} (Cantidad: ${item.quantity})`;
+      })
+      .join("\n");
+
+    const despedida = `\n\n¿Me podrían confirmar si los tienen disponibles y su precio actual? 😊`;
+
+    const mensajeCompleto = encabezado + listaProductos + despedida;
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeCompleto)}`;
+
+    window.open(url, "_blank");
   };
 
   return (

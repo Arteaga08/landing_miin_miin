@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
+
 @theme {
   /* El rosa vibrante de las letras MIIN */
-  --color-mun-pink: #EE6D77; 
+  --color-mun-pink: #ee6d77;
   /* Un rosa más oscuro para detalles o hover */
-  --color-mun-pink-dark: #D45B64;
+  --color-mun-pink-dark: #d45b64;
   /* Fondo limpio */
-  --color-mun-bg: #FFFFFF;
-  
+  --color-mun-bg: #ffffff;
+
   --font-sans: "Poppins", "Inter", system-ui;
 }
 
