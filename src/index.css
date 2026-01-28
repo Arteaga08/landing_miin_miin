@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  /* Aquí definimos tu paleta de colores del logo directamente */
+  --color-mun-cherry: #a8282d;
+  --color-mun-coral: #ee6d77;
+  --color-mun-pink-bg: #fff0f1;
+
+  /* Podemos añadir una fuente más 'curvy' para el estilo K-Beauty */
+  --font-sans: "Poppins", ui-sans-serif, system-ui;
+}
