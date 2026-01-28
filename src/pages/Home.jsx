@@ -23,7 +23,10 @@ const Home = () => {
       {/* Título Estilizado: Quitamos el "cherry" y usamos Negro + Rosa */}
       <div className="text-center mb-12 space-y-2">
         <h1 className="text-5xl font-black text-black uppercase tracking-tighter italic">
-          Catálago <span className="text-mun-pink italic">Miin Miin</span>
+          Catálago
+        </h1>
+        <h1 className="text-5xl font-black text-black uppercase tracking-tighter italic">
+           <span className="text-mun-pink italic">Miin Miin</span>
         </h1>
         <p className="text-black/60 font-bold uppercase text-xs tracking-widest">
           Encuentra la rutina perfecta para tu piel

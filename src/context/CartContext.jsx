@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
   const sendWhatsApp = () => {
     const phone = "521234567890"; // Reemplaza con tu número real
     const items = cart.map((i) => `- ${i.quantity}x ${i.nombre}`).join("%0A");
-    const total = cart.reduce((acc, i) => acc + i.precio * i.quantity, 0);
+    //const total = cart.reduce((acc, i) => acc + i.precio * i.quantity, 0);
     const message = `Hola Mün MIIN! ✨%0AQuisiera pedir los siguientes productos:%0A${items}%0A%0ATotal: $${total.toFixed(2)}`;
 
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
