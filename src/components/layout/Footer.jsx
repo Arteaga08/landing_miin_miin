@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="flex gap-6">
             {/* Instagram */}
             <a
-              href="https://instagram.com/tu_usuario"
+              href="https://www.instagram.com/miin_miin888/"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-2"
@@ -37,7 +37,7 @@ const Footer = () => {
 
             {/* TikTok */}
             <a
-              href="https://tiktok.com/@tu_usuario"
+              href="https://www.tiktok.com/@miin_miin888"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-2"
