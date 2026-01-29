@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
     // Solo enviamos nombre y cantidad
     const listaProductos = cart
       .map((item) => {
-        return `- ${item.nombre} (Cantidad: ${item.quantity})`;
+        return `- ${item.nombre} `;
       })
       .join("\n");
 

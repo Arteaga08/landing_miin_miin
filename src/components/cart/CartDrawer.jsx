@@ -1,10 +1,10 @@
 import { useCart } from "../../context/CartContext";
-import { X, Trash2, MessageCircle, AlertCircle } from "lucide-react";
+import { X, Trash2, MessageCircle, ShoppingBag, AlertCircle } from "lucide-react";
 
 const CartDrawer = ({ isOpen, onClose }) => {
-  const { cart, removeFromCart, sendWhatsApp } = useCart();
-  const total = cart.reduce(
-    (acc, item) => acc + item.precio * item.quantity,
+  const { cart = [], removeFromCart, sendWhatsApp } = useCart();
+  const total = (cart || []).reduce(
+    (acc, item) => acc + (item.precio || 0) * (item.quantity || 1),
     0,
   );
 

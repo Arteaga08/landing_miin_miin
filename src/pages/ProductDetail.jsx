@@ -2,22 +2,39 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { productos } from "../data/products";
 import { useCart } from "../context/CartContext";
-import { ArrowLeft, ShoppingCart, Sparkles, BookOpen } from "lucide-react";
+import {
+  ArrowLeft,
+  ShoppingCart,
+  Sparkles,
+  BookOpen,
+  Check,
+} from "lucide-react"; // Añadimos Check
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { cart, addToCart } = useCart(); // Traemos 'cart' para validar
 
   const producto = productos.find((p) => p.id === parseInt(id));
-
   const [imagenPrincipal, setImagenPrincipal] = useState(
     producto?.imagenes?.[0],
   );
+  const [showToast, setShowToast] = useState(false);
+
+  // Lógica de validación: ¿Ya está en el carrito?
+  const isAdded = cart.some((item) => item.id === producto?.id);
 
   useEffect(() => {
     if (producto) setImagenPrincipal(producto.imagenes[0]);
   }, [producto]);
+
+  const handleAdd = () => {
+    if (!isAdded && producto) {
+      addToCart(producto);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+    }
+  };
 
   if (!producto)
     return (
@@ -28,6 +45,7 @@ const ProductDetail = () => {
 
   return (
     <main className="p-6 max-w-5xl mx-auto animate-in fade-in duration-500">
+      {/* Botón Volver */}
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-black font-black uppercase text-xs tracking-widest mb-8 hover:text-mun-pink transition-colors group"
@@ -40,25 +58,22 @@ const ProductDetail = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* SECCIÓN IZQUIERDA: GALERÍA */}
+        {/* SECCIÓN IZQUIERDA: GALERÍA (Sin cambios) */}
         <div className="space-y-6">
-          {/* CONTENEDOR PRINCIPAL: Forzamos un cuadrado perfecto que no cambia */}
           <div className="relative w-full aspect-square bg-white border-2 border-black p-4 rounded-[30px] shadow-[8px_8px_0px_0px_#000000] flex items-center justify-center overflow-hidden">
             <img
               src={imagenPrincipal}
               alt={producto.nombre}
-              /* object-contain evita que la imagen se deforme o se corte */
               className="w-full h-full object-contain transition-all duration-300"
             />
           </div>
 
-          {/* MINIATURAS: Forzamos tamaño fijo y recorte uniforme */}
-          <div className="flex gap-3 overflow-x-auto py-2 scrollbar-hide">
+          {/* Miniaturas con Padding corregido para que no se corte la sombra */}
+          <div className="flex gap-3 overflow-x-auto p-2 scrollbar-hide">
             {producto.imagenes.map((img, index) => (
               <button
                 key={index}
                 onClick={() => setImagenPrincipal(img)}
-                /* w-24 h-24 fija el tamaño exacto. aspect-square asegura la forma */
                 className={`shrink-0 w-24 h-24 aspect-square rounded-2xl border-2 overflow-hidden bg-white transition-all ${
                   imagenPrincipal === img
                     ? "border-mun-pink scale-105 shadow-[4px_4px_0px_0px_#000000]"
@@ -68,7 +83,6 @@ const ProductDetail = () => {
                 <img
                   src={img}
                   alt={`${producto.nombre} ${index}`}
-                  /* object-cover hace que la miniatura SIEMPRE rellene el cuadrito */
                   className="w-full h-full object-cover"
                 />
               </button>
@@ -86,6 +100,7 @@ const ProductDetail = () => {
             {producto.nombre}
           </h1>
 
+          {/* Status de Stock */}
           <div className="flex items-center gap-4 mt-2">
             <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000]">
               <span
@@ -95,14 +110,9 @@ const ProductDetail = () => {
                 {producto.stock ? "En Stock" : "Agotado"}
               </span>
             </div>
-
-            {producto.stock && (
-              <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest">
-                {producto.cantidadDisponible} unidades disponibles
-              </span>
-            )}
           </div>
 
+          {/* Cards de Info */}
           <div className="space-y-4">
             <div className="bg-white p-5 border-2 border-black rounded-2xl shadow-[4px_4px_0px_0px_#000000]">
               <h3 className="flex items-center gap-2 font-black uppercase text-xs mb-3 text-black tracking-widest">
@@ -124,12 +134,33 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => addToCart(producto)}
-            className="w-full bg-mun-pink text-white py-4 rounded-full font-black uppercase text-lg shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-3 active:scale-95"
-          >
-            <ShoppingCart size={24} /> Cotizar Producto
-          </button>
+          {/* BOTÓN DE ACCIÓN DINÁMICO */}
+          <div className="relative pt-4">
+
+
+            <button
+              onClick={handleAdd}
+              disabled={isAdded || !producto.stock}
+              className={`w-full py-4 rounded-full font-black uppercase text-lg flex items-center justify-center gap-3 transition-all duration-200 border-2 border-black
+                ${
+                  isAdded
+                    ? "bg-gray-100 text-gray-400 shadow-none cursor-default"
+                    : "bg-mun-pink text-white shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:scale-95"
+                }
+                ${!producto.stock && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
+              `}
+            >
+              {isAdded ? (
+                <>
+                  <Check size={24} strokeWidth={3} /> Ya en el carrito
+                </>
+              ) : (
+                <>
+                  <ShoppingCart size={24} /> Cotizar Producto
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </main>
