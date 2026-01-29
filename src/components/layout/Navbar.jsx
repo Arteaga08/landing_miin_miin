@@ -16,7 +16,7 @@ const Navbar = ({ onOpenCart }) => {
         {/* COLUMNA 1: MENSAJE (SEOUL -> MEXICO) */}
         <div className="flex justify-start">
           <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-none italic text-black/50">
-            De Seoul <br className="md:hidden" /> Para México
+            De Seúl <br className="md:hidden" /> Para México
           </span>
         </div>
 

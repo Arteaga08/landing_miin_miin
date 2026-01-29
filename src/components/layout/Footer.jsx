@@ -58,7 +58,7 @@ const Footer = () => {
           <div className="pt-8 border-t border-black/5 w-full max-w-xs">
             <p className="text-[9px] font-bold text-black/30 uppercase leading-loose">
               © 2026 Miin Miin <br />
-              Desde Seoul para México
+              Desde Seúl para México
             </p>
           </div>
         </div>

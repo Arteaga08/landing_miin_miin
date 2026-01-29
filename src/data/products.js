@@ -74,7 +74,7 @@ export const productos = [
     stock: true, 
     cantidadDisponible: 1,
     imagenes: [
-      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769575480/Gemini_Generated_Image_p1245hp1245hp124_aagzps.png",
+      
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769575517/cetella_nfcuwv.jpg",
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769575528/centella2_i69afz.jpg",
     ],
