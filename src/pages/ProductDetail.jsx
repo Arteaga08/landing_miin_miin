@@ -47,14 +47,20 @@ const ProductDetail = () => {
     <main className="p-6 max-w-5xl mx-auto animate-in fade-in duration-500">
       {/* Botón Volver */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => {
+          // Si ya actualizaste a múltiples categorías usa: producto.categorias[0]
+          // Si sigues con una sola usa: producto.categoria
+          const categoriaDestino =
+            producto.categoria || producto.categorias?.[0];
+          navigate(`/?categoria=${categoriaDestino}`);
+        }}
         className="flex items-center gap-2 text-black font-black uppercase text-xs tracking-widest mb-8 hover:text-mun-pink transition-colors group"
       >
         <ArrowLeft
           size={18}
           className="group-hover:-translate-x-1 transition-transform"
         />
-        Volver al catálogo
+        Volver a {producto.categoria?.replace("_", " ") || "Catálogo"}
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
@@ -136,8 +142,6 @@ const ProductDetail = () => {
 
           {/* BOTÓN DE ACCIÓN DINÁMICO */}
           <div className="relative pt-4">
-
-
             <button
               onClick={handleAdd}
               disabled={isAdded || !producto.stock}
