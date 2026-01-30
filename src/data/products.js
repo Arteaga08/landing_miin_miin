@@ -51,7 +51,7 @@ export const productos = [
 - Deja que el producto se absorba dando ligeros toquecitos y continúa con el resto de tu rutina.
 - Puedes usarlo de día y de noche.
       `,
-    stock: false, 
+    stock: false,
     cantidadDisponible: 0,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769576535/Madagascar_Centella_Probio-Cica_Bakuchiol_Eye_Cream_1_wmep8b.webp",
@@ -71,10 +71,9 @@ export const productos = [
       - Masajear suavemente con movimientos circulares. Emulsionar con agua para crear una sensación lechosa antes de enjuagar completamente con agua tibia. 
       - A continuación, aplica una pequeña cantidad del limpiador Ampoule Foam en tus manos y frota para crear una textura espumosa. 
       - Frote la piel con movimientos circulares antes de enjuagar completamente con agua tibia. Continúe con un tónico o el siguiente paso en su rutina personal de cuidado de la piel.`,
-    stock: true, 
+    stock: true,
     cantidadDisponible: 1,
     imagenes: [
-      
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769575517/cetella_nfcuwv.jpg",
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769575528/centella2_i69afz.jpg",
     ],
@@ -110,7 +109,7 @@ export const productos = [
       "Aceite limpiador ligero que disuelve suavemente el maquillaje, el protector solar, las impurezas y los aceites sin irritar el área de los ojos. Contiene centella asiática y antioxidantes para calmar la piel sensible, reponer la hidratación de la piel y combatir los daños por agentes ambientales externos. Deja la piel con una sensación hidratada, suave y fresca sin resercarla ni efecto grasoso.",
     comoUsar:
       "Aplica algunas bombas de aceite limpiador sobre la cara seca con las manos secas. Masajea suavemente con movimientos circulares. Emulsiona con agua para crear una emoción lechosa antes de enjuagar completamente con agua tibia.",
-    stock: true, 
+    stock: true,
     cantidadDisponible: 3,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769577549/skin1004-cleanser-centella-light-cleansing-oil-42321970594038_1440x_sdjogi.jpg",
@@ -130,7 +129,7 @@ export const productos = [
       - Después de lavar tu rostro y usar un tónico, aplica una pipeta de este suero con masaje sobre tu piel, de día y/o noche.
 - Sigue con el resto de tu rutina: Contorno de ojos, crema hidratante y protector solar (en el día).
       `,
-    stock: true, 
+    stock: true,
     cantidadDisponible: 5,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769578002/skin1004-ampoule-serum-100ml-poremizing-fresh-ampoule-38642870780150_1440x_lpqgqu.png",
@@ -151,7 +150,7 @@ export const productos = [
 - Da una sensación de firmeza y suavidad`,
     comoUsar:
       "Aplicar por la noche sobre piel limpia, 2–3 veces por semana. Masajear suavemente y presionar para absorber. No combinar con exfoliantes fuertes o retinoides la misma noche.",
-    stock: true, 
+    stock: true,
     cantidadDisponible: 1,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769578720/reedle-shot-100-essence_dbtryq.jpg",
@@ -168,7 +167,7 @@ export const productos = [
       "Revierte los signos del envejecimiento con esta crema en gel enriquecida con colágeno y elastina para mejorar la elasticidad de la piel y reducir arrugas. La niacinamida y el extracto de arándano ayudan a lograr una tez más luminosa, mientras que el ácido hialurónico y el escualano fortalecen la barrera de hidratación de la piel. Formulada sin colorantes artificiales, el tono rosado de la crema proviene de varios ingredientes ricos en vitaminas.",
     comoUsar:
       "En el último paso de tu rutina de cuidado facial, aplica una cantidad moderada en todo el rostro y da golpecitos suaves para que se absorba.",
-    stock: false, 
+    stock: false,
     cantidadDisponible: 0,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769579133/CollagenJellyCream_1_2048x2048_k5he9c.jpg",
@@ -202,7 +201,7 @@ export const productos = [
       "La Crema Enriquecida con Centella Probio-Cica de Madagascar SKIN1004 repara la barrera cutánea dañada para evitar la evaporación de la humedad y proporciona cuidado a la piel seca y sensible. El extracto de Centella Asiática calma eficazmente la piel, mientras que el ProBio-Cica vegano (Centella fermentada con TECA), cuida las barreras cutáneas débiles y sensibles. La crema tiene una textura suave y mantecosa para una hidratación duradera, dejando la piel sedosa y suave.",
     comoUsar:
       "Aplicar y extender suavemente sobre la piel en el último paso de su rutina de cuidado de la piel, y dar ligeros golpecitos para que se absorba en la piel.",
-    stock: true, 
+    stock: true,
     cantidadDisponible: 2,
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769579989/skin1004-cream-probio-cica-enrich-cream-40032154747126_1440x_gjlofa.png",
@@ -268,6 +267,136 @@ export const productos = [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769582135/skin1004-sun-50ml-hyalu-cica-water-fit-sun-serum-spf50-pa-38409244737782_1440x_g6rylh.jpg",
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769582170/skin1004-sun-hyalu-cica-water-fit-sun-serum-spf50-pa-39366328811766_1440x_g5fwej.jpg",
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769582203/skin1004-sun-hyalu-cica-water-fit-sun-serum-spf50-pa-37102207860982_1440x_nbwiq7.png",
+    ],
+  },
+  {
+    id: 15,
+    nombre: "Celimax - oil control light sunscreen spf 50+ pa++++",
+    categoria: "protector_solar",
+    descripcionCorta:
+      "Hidratante, Refrescante, Protección, Contra las manchas, Matificante y Reequilibrante",
+    paraQueSirve:
+      "Este protector solar híbrido químico y mineral ofrece protección solar de amplio espectro con FPS 50+ PA++++ y beneficios seborreguladores. Su fórmula, enriquecida con el ingrediente patentado Anti Sebum-P, controla eficazmente la producción excesiva de sebo. Su textura suave y sedosa proporciona un acabado refrescante y sin manchas blancas. El producto, probado dermatológicamente, es hipoalergénico. Adecuado para varios tipos de piel, incluidos",
+    comoUsar:
+      "Agita, aplica como último paso de cuidado. Deja unos minutos secar y continúa con maquillaje si deseas. Reaplica cada 2 h bajo exposición solar intensa.",
+    stock: true,
+    cantidadDisponible: 1,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769735647/864_magnify_028_wzzdia.jpg",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769735691/df7fbcfd37d34b53_boi710.jpg",
+    ],
+  },
+  {
+    id: 16,
+    nombre:
+      "Celimax - Pore + Dark Spot Brightening Care Sunscreen SPF50+ PA++++ - 50ml",
+    categoria: "protector_solar",
+    descripcionCorta:
+      "Protección solar, iluminante, suavizante, efecto hidratante",
+    paraQueSirve:
+      "Si te preocupan manchas solares, poros visibles o tono desigual, este protector solar combina alta protección con ingredientes que iluminan, suavizan textura y dejan la piel confortable.",
+    comoUsar:
+      "Aplica generosamente como último paso de la rutina matinal. Repite cada 2 horas si estás al sol o después de nadar.",
+    stock: true,
+    cantidadDisponible: 3,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769736552/61pukBgeUVL._AC_SL1500__pvkre3.jpg",
+      
+    ],
+  },
+  {
+    id: 17,
+    nombre:
+      "Celimax - Pore + Dark Spot Brightening Care Sunscreen SPF50+ PA++++ - 50ml",
+    categoria: "protector_solar",
+    descripcionCorta:
+      "Protección solar, iluminante, suavizante, efecto hidratante",
+    paraQueSirve:
+      "Si te preocupan manchas solares, poros visibles o tono desigual, este protector solar combina alta protección con ingredientes que iluminan, suavizan textura y dejan la piel confortable.",
+    comoUsar:
+      "Aplica generosamente como último paso de la rutina matinal. Repite cada 2 horas si estás al sol o después de nadar.",
+    stock: true,
+    cantidadDisponible: 3,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769736552/61pukBgeUVL._AC_SL1500__pvkre3.jpg",
+      
+    ],
+  },
+  {
+    id: 18,
+    nombre:
+    "Celimax - Oil Control Mattifying Sun Stick SPF50+ PA++++ - 19g",
+    categoria: "protector_solar",
+    descripcionCorta:
+      "Controla el brillo de tu carita a lo largo del día mientras la proteges con este protector solar ",
+    paraQueSirve:
+      "Controla el brillo de tu carita a lo largo del día mientras la proteges con este protector solar en barra con SPF50+ y PA++++. Está formulado con ingredientes no comedogénicos, así como Calamina y Centella Asiática que ayudan a disminuir la inflamación y Anti Sebum P que controla la producción de sebo. Además, su aplicador tiene forma de gota para aplicarlo más fácilmente alrededor de ojos y nariz.",
+    comoUsar:
+      "En el último paso de tu rutina de skincare de día pasa el sun stick de 3 a 4 veces por cada zona de tu rostro para asegurar una protección uniforme.",
+    stock: true,
+    cantidadDisponible: 3,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739170/Oil_Control_Mattifying_Sun_Stick_19g_1_tziwka.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739217/Oil_Control_Mattifying_Sun_Stick_19g_2_bnzizd.jpg",
+      
+    ],
+  },
+  {
+    id: 19,
+    nombre:
+    "Arencia - Fresh Green Rice Mochi Cleanser - 120g",
+    categoria: "piel_acne",
+    descripcionCorta:
+      "Este limpiador mantiene tu piel hidratada mientras remueve el polvo y las impurezas de los poros. ",
+    paraQueSirve:
+      "Este limpiador mantiene tu piel hidratada mientras remueve el polvo y las impurezas de los poros. Está formulada con Polvo de Arroz y Kaolina que ayudan a exfoliar la piel y a remover puntos negros, además de Extracto de Hamamelis que le da un efecto glowy a la piel. Su textura de mochi la vuelve perfecta para usarse como mascarilla.",
+    comoUsar: `
+  Como limpiador de diario:
+    - Aplica la cantidad equivalente a una moneda pequeña sobre tu rostro húmedo.
+- Masajea suavemente para crear una espuma y deja actuar por 30 segundos.
+- Enjuaga con agua tibia.
+
+Como mascarilla limpiadora:
+- Aplica una capa delgada de mascarilla de arcilla en el rostro limpio y seco, evitando el área de los ojos y los labios.
+- Masajea la arcilla de acuerdo a las necesidades de tu piel y deja que actúe por 1-2 min aproximadamente.
+- Una vez que la mascarilla se haya secado, retírala con agua tibia.
+    `,
+     
+    stock: true,
+    cantidadDisponible: 3,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739633/1FreshGreenRiceMochiCleanser_qunioo.png",
+    "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739674/2_-_Fresh_Green_Cleanser_120g_d0omag.png",
+      
+    ],
+  },
+  {
+    id: 20,
+    nombre:
+    "Centellian24 - Madeca Cream Time Reverse (Season7) 50ml",
+    categoria: "todo_tipo",
+    descripcionCorta:
+      "Contra el envejecimiento, Calmante, Reafirmante, Hidratante, Hidratante, Regenerador, Revitalizante y Fortalecimiento",
+    paraQueSirve:
+      "La Centellian24 Madeca Cream Time Reverse (Season 7) es la versión más innovadora de la reconocida línea Madeca, diseñada para reparar profundamente la piel, mejorar su elasticidad y reducir los signos del envejecimiento. Enriquecida con TECA (Extracto Purificado de Centella Asiática) y un complejo de ingredientes antiedad, actúa directamente sobre arrugas, firmeza y textura irregular.",
+    comoUsar: `
+ - Diariamente: Aplicar suavemente como último paso del cuidado facial, mañana y noche. 
+
+- Especial: Aplicar una capa gruesa por la noche para un cuidado intensivo y mejores resultados.
+    `,
+     
+    stock: true,
+    cantidadDisponible: 3,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769740218/CENTELLIAN-24-Madeca-Cream-Time-Reverse-50-ML_gjzhe9.jpg",
+    "https://res.cloudinary.com/dnppruwh4/image/upload/v1769740259/CENTELLIAN24MadecaCreamTimeReverse50ML3_fx46nk.png",
+      
     ],
   },
 ];
