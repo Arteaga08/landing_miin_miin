@@ -9,7 +9,7 @@ import {
   BookOpen,
   Check,
   Package,
-  Star, // Importamos Star para la etiqueta de Best Seller
+  Star,
 } from "lucide-react";
 
 const ProductDetail = () => {
@@ -29,7 +29,7 @@ const ProductDetail = () => {
   }, [producto]);
 
   const handleAdd = () => {
-    if (!isAdded && producto) {
+    if (!isAdded && producto && producto.cantidadDisponible > 0) {
       addToCart(producto);
     }
   };
@@ -43,7 +43,6 @@ const ProductDetail = () => {
 
   return (
     <main className="p-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      {/* CAMBIO 1: Botón Volver con historial real */}
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-black font-black uppercase text-xs tracking-widest mb-8 hover:text-mun-pink transition-colors group"
@@ -56,7 +55,7 @@ const ProductDetail = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* SECCIÓN IZQUIERDA: GALERÍA */}
+        {/* GALERÍA */}
         <div className="space-y-6">
           <div className="relative w-full aspect-square bg-white border-2 border-black p-4 rounded-[30px] shadow-[8px_8px_0px_0px_#000000] flex items-center justify-center overflow-hidden">
             <img
@@ -87,18 +86,15 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* SECCIÓN DERECHA: INFO */}
+        {/* INFORMACIÓN */}
         <div className="space-y-6">
-          {/* CAMBIO 2: Contenedor de Etiquetas (Categoría + Best Seller) */}
           <div className="flex flex-wrap items-center gap-3">
-            {/* Etiqueta de Categoría */}
             <span className="inline-block bg-mun-pink text-white px-4 py-1 rounded-full text-[10px] font-black uppercase border-2 border-black shadow-[2px_2px_0px_0px_#000000]">
               {producto.categoria.replace("_", " ")}
             </span>
 
-            {/* Etiqueta Global: Top Ventas (Solo si aplica) */}
             {producto.masVendido && (
-              <div className="flex items-center gap-1 bg-yellow-300 border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000] animate-in zoom-in duration-300">
+              <div className="flex items-center gap-1 bg-yellow-300 border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000]">
                 <Star size={14} className="fill-black text-black" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-black">
                   Top Ventas
@@ -111,29 +107,28 @@ const ProductDetail = () => {
             {producto.nombre}
           </h1>
 
-          {/* Status de Stock + Cantidad */}
+          {/* STATUS Y CANTIDAD BASADO EN DATA */}
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
               <span
-                className={`w-3 h-3 rounded-full border border-black ${producto.stock > 0 ? "bg-green-400 animate-pulse" : "bg-red-500"}`}
+                className={`w-3 h-3 rounded-full border border-black ${producto.cantidadDisponible > 0 ? "bg-green-400 animate-pulse" : "bg-red-500"}`}
               ></span>
               <span className="text-[10px] font-black uppercase tracking-widest">
-                {producto.stock > 0 ? "En Stock" : "Agotado"}
+                {producto.cantidadDisponible > 0 ? "En Stock" : "Agotado"}
               </span>
             </div>
 
-            {/* Cantidad disponible */}
-            {producto.stock > 0 && (
+            {/* Muestra la cantidad real de tu JSON */}
+            {producto.cantidadDisponible > 0 && (
               <div className="flex items-center gap-2 bg-mun-pink/10 border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
                 <Package size={14} className="text-black" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-black">
-                  {producto.stock} disponibles
+                  {producto.cantidadDisponible} disponibles
                 </span>
               </div>
             )}
           </div>
 
-          {/* Cards de Info */}
           <div className="space-y-4">
             <div className="bg-white p-5 border-2 border-black rounded-2xl shadow-[4px_4px_0px_0px_#000000]">
               <h3 className="flex items-center gap-2 font-black uppercase text-xs mb-3 text-black tracking-widest">
@@ -155,18 +150,17 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* BOTÓN DE ACCIÓN */}
           <div className="relative pt-4">
             <button
               onClick={handleAdd}
-              disabled={isAdded || producto.stock <= 0}
+              disabled={isAdded || producto.cantidadDisponible <= 0}
               className={`w-full py-4 rounded-full font-black uppercase text-lg flex items-center justify-center gap-3 transition-all duration-200 border-2 border-black
                 ${
                   isAdded
                     ? "bg-gray-100 text-gray-400 shadow-none cursor-default translate-x-1 translate-y-1"
                     : "bg-mun-pink text-white shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:scale-95"
                 }
-                ${producto.stock <= 0 && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
+                ${producto.cantidadDisponible <= 0 && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
               `}
             >
               {isAdded ? (
