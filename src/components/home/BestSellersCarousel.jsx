@@ -35,7 +35,7 @@ const CarouselItem = ({ producto }) => {
           />
 
           {/* ETIQUETA DE CATEGORÍA (La que ya tenías) */}
-          <span className="absolute top-3 left-3 bg-white border border-black px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <span className="absolute top-3 left-3 bg-white border border-black px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:bg-mun-pink group-hover:text-white transition-colors">
             {producto.categoria.replace("_", " ")}
           </span>
 
@@ -68,7 +68,13 @@ const CarouselItem = ({ producto }) => {
           <div className="flex gap-2 w-full mt-auto">
             <Link
               to={`/producto/${producto.id}`}
-              className="grow flex items-center justify-center text-center bg-white border-2 border-black py-2.5 rounded-full font-black text-[10px] uppercase transition-all duration-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-mun-pink hover:text-white active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              className="grow flex items-center justify-center text-center bg-white border-2 border-black py-2.5 rounded-full font-black text-[10px] uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 
+  
+  /* Estado Hover (PC) */
+  hover:bg-mun-pink hover:text-white 
+  
+  /* Estado Active (Móvil y Clic) - Aquí se mantiene la sensación de presión */
+  active:bg-mun-pink active:text-white active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               Ver más
             </Link>
