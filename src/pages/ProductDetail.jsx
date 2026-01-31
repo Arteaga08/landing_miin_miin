@@ -8,20 +8,20 @@ import {
   Sparkles,
   BookOpen,
   Check,
-} from "lucide-react"; // Añadimos Check
+  Package,
+  Star, // Importamos Star para la etiqueta de Best Seller
+} from "lucide-react";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { cart, addToCart } = useCart(); // Traemos 'cart' para validar
+  const { cart, addToCart } = useCart();
 
   const producto = productos.find((p) => p.id === parseInt(id));
   const [imagenPrincipal, setImagenPrincipal] = useState(
     producto?.imagenes?.[0],
   );
-  const [showToast, setShowToast] = useState(false);
 
-  // Lógica de validación: ¿Ya está en el carrito?
   const isAdded = cart.some((item) => item.id === producto?.id);
 
   useEffect(() => {
@@ -31,8 +31,6 @@ const ProductDetail = () => {
   const handleAdd = () => {
     if (!isAdded && producto) {
       addToCart(producto);
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2000);
     }
   };
 
@@ -45,26 +43,20 @@ const ProductDetail = () => {
 
   return (
     <main className="p-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      {/* Botón Volver */}
+      {/* CAMBIO 1: Botón Volver con historial real */}
       <button
-        onClick={() => {
-          // Si ya actualizaste a múltiples categorías usa: producto.categorias[0]
-          // Si sigues con una sola usa: producto.categoria
-          const categoriaDestino =
-            producto.categoria || producto.categorias?.[0];
-          navigate(`/?categoria=${categoriaDestino}`);
-        }}
+        onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-black font-black uppercase text-xs tracking-widest mb-8 hover:text-mun-pink transition-colors group"
       >
         <ArrowLeft
           size={18}
           className="group-hover:-translate-x-1 transition-transform"
         />
-        Volver a {producto.categoria?.replace("_", " ") || "Catálogo"}
+        Volver
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* SECCIÓN IZQUIERDA: GALERÍA (Sin cambios) */}
+        {/* SECCIÓN IZQUIERDA: GALERÍA */}
         <div className="space-y-6">
           <div className="relative w-full aspect-square bg-white border-2 border-black p-4 rounded-[30px] shadow-[8px_8px_0px_0px_#000000] flex items-center justify-center overflow-hidden">
             <img
@@ -74,13 +66,12 @@ const ProductDetail = () => {
             />
           </div>
 
-          {/* Miniaturas con Padding corregido para que no se corte la sombra */}
           <div className="flex gap-3 overflow-x-auto p-2 scrollbar-hide">
             {producto.imagenes.map((img, index) => (
               <button
                 key={index}
                 onClick={() => setImagenPrincipal(img)}
-                className={`shrink-0 w-24 h-24 aspect-square rounded-2xl border-2 overflow-hidden bg-white transition-all ${
+                className={`shrink-0 w-24 h-24 rounded-2xl border-2 overflow-hidden bg-white transition-all ${
                   imagenPrincipal === img
                     ? "border-mun-pink scale-105 shadow-[4px_4px_0px_0px_#000000]"
                     : "border-black/10 hover:border-black"
@@ -98,24 +89,48 @@ const ProductDetail = () => {
 
         {/* SECCIÓN DERECHA: INFO */}
         <div className="space-y-6">
-          <span className="inline-block bg-mun-pink text-white px-4 py-1 rounded-full text-[10px] font-black uppercase border-2 border-black shadow-[2px_2px_0px_0px_#000000]">
-            {producto.categoria.replace("_", " ")}
-          </span>
+          {/* CAMBIO 2: Contenedor de Etiquetas (Categoría + Best Seller) */}
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Etiqueta de Categoría */}
+            <span className="inline-block bg-mun-pink text-white px-4 py-1 rounded-full text-[10px] font-black uppercase border-2 border-black shadow-[2px_2px_0px_0px_#000000]">
+              {producto.categoria.replace("_", " ")}
+            </span>
+
+            {/* Etiqueta Global: Top Ventas (Solo si aplica) */}
+            {producto.masVendido && (
+              <div className="flex items-center gap-1 bg-yellow-300 border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000] animate-in zoom-in duration-300">
+                <Star size={14} className="fill-black text-black" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-black">
+                  Top Ventas
+                </span>
+              </div>
+            )}
+          </div>
 
           <h1 className="text-4xl font-black text-black uppercase tracking-tighter leading-none italic">
             {producto.nombre}
           </h1>
 
-          {/* Status de Stock */}
-          <div className="flex items-center gap-4 mt-2">
-            <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000]">
+          {/* Status de Stock + Cantidad */}
+          <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
               <span
-                className={`w-3 h-3 rounded-full border border-black ${producto.stock ? "bg-green-400 animate-pulse" : "bg-red-500"}`}
+                className={`w-3 h-3 rounded-full border border-black ${producto.stock > 0 ? "bg-green-400 animate-pulse" : "bg-red-500"}`}
               ></span>
               <span className="text-[10px] font-black uppercase tracking-widest">
-                {producto.stock ? "En Stock" : "Agotado"}
+                {producto.stock > 0 ? "En Stock" : "Agotado"}
               </span>
             </div>
+
+            {/* Cantidad disponible */}
+            {producto.stock > 0 && (
+              <div className="flex items-center gap-2 bg-mun-pink/10 border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
+                <Package size={14} className="text-black" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-black">
+                  {producto.stock} disponibles
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Cards de Info */}
@@ -125,7 +140,7 @@ const ProductDetail = () => {
                 <Sparkles size={18} className="text-mun-pink" /> ¿Para qué
                 sirve?
               </h3>
-              <p className="text-gray-700 leading-relaxed text-sm">
+              <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">
                 {producto.paraQueSirve}
               </p>
             </div>
@@ -140,18 +155,18 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* BOTÓN DE ACCIÓN DINÁMICO */}
+          {/* BOTÓN DE ACCIÓN */}
           <div className="relative pt-4">
             <button
               onClick={handleAdd}
-              disabled={isAdded || !producto.stock}
+              disabled={isAdded || producto.stock <= 0}
               className={`w-full py-4 rounded-full font-black uppercase text-lg flex items-center justify-center gap-3 transition-all duration-200 border-2 border-black
                 ${
                   isAdded
-                    ? "bg-gray-100 text-gray-400 shadow-none cursor-default"
+                    ? "bg-gray-100 text-gray-400 shadow-none cursor-default translate-x-1 translate-y-1"
                     : "bg-mun-pink text-white shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:scale-95"
                 }
-                ${!producto.stock && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
+                ${producto.stock <= 0 && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
               `}
             >
               {isAdded ? (

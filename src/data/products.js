@@ -23,6 +23,7 @@ export const productos = [
     id: 2,
     nombre: "SKIN1004 - Tone Brightening Capsule Ampoule",
     categoria: "todo_tipo",
+    
     descripcionCorta:
       "Ampolla iluminadora de uso diario diseñada para piel normal, sensible y mixta. ",
     paraQueSirve:
@@ -63,6 +64,7 @@ export const productos = [
     nombre:
       "SKIN1004 - Madagascar Centella Double Cleansing Duo - 1 set (2 artículos)",
     categoria: "todo_tipo",
+    
     descripcionCorta:
       "Rutina de limpieza vital para mantener una buena salud de la piel.",
     paraQueSirve:
@@ -82,6 +84,7 @@ export const productos = [
     id: 5,
     nombre: "Mixsoon - Bean Essence - 50ml",
     categoria: "todo_tipo",
+    
     descripcionCorta:
       "Elimina las células muertas de la piel y controla el sebo para una piel perfecta",
     paraQueSirve:
@@ -121,6 +124,7 @@ export const productos = [
     id: 7,
     nombre: "SKIN1004 - Madagascar Centella Poremizing Fresh Ampoule - 100ml",
     categoria: "todo_tipo",
+    
     descripcionCorta:
       "ULTRA HIDRATANTE Debido a su alta concentración de extracto, esta ampolla para la piel penetra profundamente en la piel y la deja flexible y suave durante todo el día.",
     paraQueSirve:
@@ -141,6 +145,7 @@ export const productos = [
     id: 8,
     nombre: "VT - Reedle Shot 100 - 50ml",
     categoria: "todo_tipo",
+    
     descripcionCorta:
       "Sérum facial avanzado y especializado en renovación dérmica",
     paraQueSirve: `Si tu piel tiene textura o poros marcados, este suero nocturno estimula la renovación celular y mejora la absorción de otros productos para una piel más lisa y uniforme.Suaviza la textura de la piel
@@ -303,32 +308,34 @@ export const productos = [
 
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769736552/61pukBgeUVL._AC_SL1500__pvkre3.jpg",
-      
     ],
   },
   {
     id: 17,
-    nombre:
-      "Celimax - Pore + Dark Spot Brightening Care Sunscreen SPF50+ PA++++ - 50ml",
-    categoria: "protector_solar",
+    nombre: "Celimax - The Vita A Retinal Shot Tightening Booster - 15ml",
+    categoria: "todo_tipo",
+    masVendido: true,
     descripcionCorta:
-      "Protección solar, iluminante, suavizante, efecto hidratante",
+      "Favorece la textura de la piel. Promueve la firmeza. Cuidado suave para la noche.",
     paraQueSirve:
-      "Si te preocupan manchas solares, poros visibles o tono desigual, este protector solar combina alta protección con ingredientes que iluminan, suavizan textura y dejan la piel confortable.",
-    comoUsar:
-      "Aplica generosamente como último paso de la rutina matinal. Repite cada 2 horas si estás al sol o después de nadar.",
+      "0,1% Retinal: derivado de la vitamina A que ayuda a apoyar la apariencia de una textura de piel más refinada y uniforme. 1% Pantenol: conocido por ayudar a hidratar la piel y a mantener su equilibrio natural de hidratación. 3% Matrixyl® 3000: complejo de péptidos que contribuye a mejorar la apariencia de una piel más firme y resistente. Ingredientes adicionales: Niacinamida, Tocoferol (Vitamina E), Esponja Hidrolizada, Palmitoyl Tripeptide-1 y Palmitoyl Tetrapeptide-7, que aportan una base nutritiva para el acondicionamiento y el confort de la piel.",
+    comoUsar: `
+    Aplicar por la noche sobre la piel limpia y seca, como parte de tu rutina nocturna.
+
+Utiliza una pequeña cantidad y extiéndela suavemente por el rostro y el cuello, evitando el contacto directo con los ojos. Deja que el sérum se absorba antes de continuar con tu hidratante habitual.
+
+Para una mayor comodidad, introdúcelo de forma gradual y úsalo de manera constante por la noche, permitiendo que tu piel se adapte de forma natural dentro de una rutina tranquila y cuidada.`,
     stock: true,
-    cantidadDisponible: 3,
+    cantidadDisponible: 1,
 
     imagenes: [
-      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769736552/61pukBgeUVL._AC_SL1500__pvkre3.jpg",
-      
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769824194/8_ql5rgy.jpg",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769824271/celimax-vita-a-retinal-shot-product-tube_dwzbxf.png",
     ],
   },
   {
     id: 18,
-    nombre:
-    "Celimax - Oil Control Mattifying Sun Stick SPF50+ PA++++ - 19g",
+    nombre: "Celimax - Oil Control Mattifying Sun Stick SPF50+ PA++++ - 19g",
     categoria: "protector_solar",
     descripcionCorta:
       "Controla el brillo de tu carita a lo largo del día mientras la proteges con este protector solar ",
@@ -342,13 +349,11 @@ export const productos = [
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739170/Oil_Control_Mattifying_Sun_Stick_19g_1_tziwka.png",
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739217/Oil_Control_Mattifying_Sun_Stick_19g_2_bnzizd.jpg",
-      
     ],
   },
   {
     id: 19,
-    nombre:
-    "Arencia - Fresh Green Rice Mochi Cleanser - 120g",
+    nombre: "Arencia - Fresh Green Rice Mochi Cleanser - 120g",
     categoria: "piel_acne",
     descripcionCorta:
       "Este limpiador mantiene tu piel hidratada mientras remueve el polvo y las impurezas de los poros. ",
@@ -365,20 +370,18 @@ Como mascarilla limpiadora:
 - Masajea la arcilla de acuerdo a las necesidades de tu piel y deja que actúe por 1-2 min aproximadamente.
 - Una vez que la mascarilla se haya secado, retírala con agua tibia.
     `,
-     
+
     stock: true,
     cantidadDisponible: 3,
 
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739633/1FreshGreenRiceMochiCleanser_qunioo.png",
-    "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739674/2_-_Fresh_Green_Cleanser_120g_d0omag.png",
-      
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769739674/2_-_Fresh_Green_Cleanser_120g_d0omag.png",
     ],
   },
   {
     id: 20,
-    nombre:
-    "Centellian24 - Madeca Cream Time Reverse (Season7) 50ml",
+    nombre: "Centellian24 - Madeca Cream Time Reverse (Season7) 50ml",
     categoria: "todo_tipo",
     descripcionCorta:
       "Contra el envejecimiento, Calmante, Reafirmante, Hidratante, Hidratante, Regenerador, Revitalizante y Fortalecimiento",
@@ -389,13 +392,147 @@ Como mascarilla limpiadora:
 
 - Especial: Aplicar una capa gruesa por la noche para un cuidado intensivo y mejores resultados.
     `,
-     
+
     stock: true,
     cantidadDisponible: 3,
 
     imagenes: [
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1769740218/CENTELLIAN-24-Madeca-Cream-Time-Reverse-50-ML_gjzhe9.jpg",
-    "https://res.cloudinary.com/dnppruwh4/image/upload/v1769740259/CENTELLIAN24MadecaCreamTimeReverse50ML3_fx46nk.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769740259/CENTELLIAN24MadecaCreamTimeReverse50ML3_fx46nk.png",
+    ],
+  },
+  {
+    id: 21,
+    nombre: "SKIN1004 - Madagascar Centella Air-Fit Suncream Light",
+    categoria: "protector_solar",
+    masVendido: true,
+    descripcionCorta: "Protector solar mineral ligerísimo con SPF30 PA++++",
+    paraQueSirve:
+      "Más allá de proteger, esta crema solar cuidará tu piel. Su fórmula cuenta con extractos de centella asiática y Houttuynia Cordata, dos ingredientes vegetales conocidos por sus propiedades calmantes y antiinflamatorias.",
+    comoUsar:
+      "En el último paso de tu rutina de día, aplica dos dedos del protector de manera uniforme sobre la piel de tu rostro. Puedes aplicarlo también en el cuello y en cualquier otra parte de tu cuerpo que vaya a estar expuesta al sol.",
+    stock: true,
+    cantidadDisponible: 2,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825129/skin1004-sun-50ml-centella-air-fit-suncream-light-spf30-pa-38642815467766_1440x_fjbagm.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825167/skin1004-sun-madagascar-centella-air-fit-suncream-light-spf30-pa-37102167884022_1440x_qzy3rp.png",
+    ],
+  },
+  {
+    id: 22,
+    nombre: "Celimax - The Real Noni Starter Kit - 20ml+10ml+10ml",
+    categoria: "piel_sensible",
+    masVendido: true,
+    descripcionCorta:
+      "Un set pensado para introducir tu piel a la rutina iluminadora y revitalizante de noni",
+    paraQueSirve: `
+      - 20 ml The Real Noni Balancing Toner (mini): Tonifica e hidrata con extracto de noni y aceite de semilla de noni. Mejora la elasticidad y suaviza la textura.
+
+- 10 ml The Real Noni Energy Ampoule (mini): Suero concentrado que calma, hidrata y revitaliza la piel estresada.
+
+- 10 ml The Real Noni Repair Cream (mini): Crema enriquecida con ceramidas que repara la barrera cutánea y sella la hidratación para un acabado juicy.
+      `,
+    comoUsar: `
+ The Real Noni Moisture Balancing Toner
+- Humedece un pad de algodón con el extracto y aplica suavemente sobre la cara recién lavada como primer paso de tu rutina.
+
+The Real Noni Energy Ampule 
+- Después de limpiar tu rostro y aplicar tónico, utiliza un pump de este suero facial.
+- Masajea suavemente sobre la piel, de día y/o noche.
+- Completa tu rutina con contorno de ojos, crema hidratante y protector solar durante el día.
+
+The Real Noni Energy Repair Cream
+- Aplica la cantidad equivalente a un chícharo (o un poco más si lo necesitas) en todo tu rostro después del suero y antes del protector solar, o como último paso antes de dormir.
+    `,
+
+    stock: true,
+    cantidadDisponible: 1,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825716/NoniStarterKit1_un4uh9.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825760/NoniStarterKit3_ijglfl.jpg",
+    ],
+  },
+  {
+    id: 23,
+    nombre:
+      "SKIN1004 Madagascar Centella Travel Kit | Kit Hidratante y Calmante",
+    categoria: "todo_tipo",
+    masVendido: true,
+    descripcionCorta:
+      "Un set completo de rutina de cuidado facial de Centella con 5 productos mini para viajar o probar la línea Centella.",
+    paraQueSirve: `
+    Este set incluye 5 minis de la línea calmante de Centella Asiática ideal para probar o llevar de viaje.
+
+- 20 ml Espuma de ampolla Centella	Elimina hasta el 92.69% de Ultra-Microdust
+- 30 ml Aceite limpiador ligero Centella	Potente limpieza profunda y acabado fresco
+- 30 ml Tóner tonificante Centella	pH ligeramente ácido de 5.5 para crear una capa protectora y mantener el equilibrio de pH de la piel
+- 30 ml Ampolla Centella	100% centella asiática proporciona un fuerte cuidado calmante para cuidar la piel sensible y fortalecer las barreras de la piel
+- 30 ml Crema calmante Centella	72% de extracto de centella asiatica calma la piel irritada inmediatamente
+    `,
+    comoUsar: `
+1. Doble limpieza: inicia con el Light Cleansing Oil, emulsiona con agua; continúa con el Ampoule Foam.
+2. Tonifica con el Toning Toner, aplica con algodón o palmas.
+3. Sella la barrera con el Ampoule aplicando unas gotas en todo el rostro.
+4. Finaliza con Soothing Cream para mantener hidratación y protección.
+    `,
+    stock: true,
+    cantidadDisponible: 1,
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825870/skin1004-others-centella-travel-kit-40800422625526_1440x_uldbri.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825914/skin1004-others--madagascar-centella-travel-kit-36440453349622_1440x_jv61vx.jpg",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769825949/skin1004-others--madagascar-centella-travel-kit-36440491786486_1440x_byjpdw.jpg",
+    ],
+  },
+  {
+    id: 24,
+    nombre: "Unleashia - Tanghulu Glaze Tint - Amberose",
+    categoria: "maquillaje",
+    masVendido: true,
+    descripcionCorta:
+      "Una tinta para labios de larga duración con un acabado ultrabrillante",
+    paraQueSirve:
+      "Una tinta para labios de larga duración con un acabado ultrabrillante como un tanghulu, contiene una textura ligera que no se siente pesada ni pegajosa además esta formulada con oléoactif que hidrata profundamente y brinda volumen en tus labios.",
+    comoUsar:
+      "Aplica directamente sobre los labios limpios y secos con el aplicador incluido, comenzando desde el centro hacia afuera. Para obtener el máximo efecto de brillo tanghul (jugoso y voluminoso), espera unos segundos y aplica una segunda capa, lo que realza el efecto de labios carnosos. ",
+
+    stock: true,
+    cantidadDisponible: 1,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769826888/Unleashia_Tanghulu_Glaze_Tint_j37zoo.jpg",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769826752/Unleashia_Tanghulu_Glaze_Tint_02-Amberose_pb8fft.jpg",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769826794/520942853_18064721009272745_4975599290811345148_n_o5nsuz.jpg",
+    ],
+  },
+  {
+    id: 25,
+    nombre: "ANUA - Rice 70 Glow Milky Toner - 40ml",
+    categoria: "todo_tipo",
+    masVendido: true,
+    descripcionCorta:
+      "Tónico hidratante y nutritivo con 70% de extracto de arroz, niacinamida y ceramidas que hidrata profundamente, ilumina la piel y deja un acabado radiante tipo “glass skin”, sin sensación grasosa.",
+    paraQueSirve:
+      `
+      - Hidrata profundamente y mantiene el balance de la piel. 
+
+- Ilumina y unifica el tono gracias a la niacinamida. 
+
+- Fortalece la barrera cutánea con ceramidas AP/NP. 
+
+- Fórmula suave y sin fragancia ni alcohol — ideal para pieles sensibles. 
+
+- Textura tipo emulsión lechosa que se absorbe rápido sin dejar residuo pegajoso.
+      `,
+    comoUsar:
+      "Aplica después de la limpieza: usa tus manos o un algodón, da palmaditas suaves hasta absorción. Puedes usarlo mañana y noche.",
+    stock: true,
+    cantidadDisponible: 1,
+
+    imagenes: [
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769828229/RICE70GLOWMILKYTONER_bvoiio.png",
+      "https://res.cloudinary.com/dnppruwh4/image/upload/v1769828303/ANUA_Rice_Toner-KB4_ovug3d.png",
       
     ],
   },
