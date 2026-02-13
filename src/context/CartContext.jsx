@@ -34,21 +34,48 @@ export const CartProvider = ({ children }) => {
   };
 
   const sendWhatsApp = () => {
-    const telefono = "526181473443"; // Reemplaza con tu número
+    const telefono = "526181473443";
 
+    // Nueva frase de apertura más equilibrada
     const encabezado =
-      "¡Hola Miinn Miin! ✨ Me gustaría cotizar la disponibilidad de estos productos:\n\n";
+      "¡Hola Miinn Miin! ✨ Me gustaría hacer un pedido par apachar mi piel: 💆🏻‍♀️\n\n";
 
-    // Solo enviamos nombre y cantidad
-    const listaProductos = cart
-      .map((item) => {
-        return `- ${item.nombre} `;
-      })
-      .join("\n");
+    const productosStock = cart.filter((item) => item.cantidadDisponible > 0);
+    const productosCotizar = cart.filter(
+      (item) => item.cantidadDisponible <= 0,
+    );
 
-    const despedida = `\n\n¿Me podrían confirmar si los tienen disponibles y su precio actual? 😊`;
+    let cuerpoMensaje = "";
 
-    const mensajeCompleto = encabezado + listaProductos + despedida;
+    // Sección de Productos Disponibles
+    if (productosStock.length > 0) {
+      cuerpoMensaje += "*PRODUCTOS DISPONIBLES*\n";
+      cuerpoMensaje += productosStock
+        .map((item) => `• ${item.nombre} — *$${item.precio}* ✨`)
+        .join("\n");
+      cuerpoMensaje += "\n\n";
+    }
+
+    // Sección de Notas para Cotizar
+    if (productosCotizar.length > 0) {
+      cuerpoMensaje += "☁️ *NOTA PARA COTIZAR (SIN STOCK)*\n";
+      cuerpoMensaje += productosCotizar
+        .map((item) => `• ${item.nombre} — *$${item.precio}* 🧸`)
+        .join("\n");
+      cuerpoMensaje +=
+        "\n_Deseo consultar disponibilidad y tiempo de espera para estos productos._\n\n";
+    }
+
+    // Cálculo del Total: SOLO de lo que está en stock
+    const totalListo = productosStock.reduce(
+      (acc, item) => acc + item.precio,
+      0,
+    );
+    const totalMsg =
+      totalListo > 0 ? `🎀 *Total de productos listos:* *$${totalListo}*` : "";
+
+
+    const mensajeCompleto = encabezado + cuerpoMensaje + totalMsg + despedida;
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeCompleto)}`;
 
     window.open(url, "_blank");

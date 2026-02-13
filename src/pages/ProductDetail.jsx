@@ -22,14 +22,16 @@ const ProductDetail = () => {
     producto?.imagenes?.[0],
   );
 
+  // Lógica original: solo verifica si ya está añadido
   const isAdded = cart.some((item) => item.id === producto?.id);
 
   useEffect(() => {
     if (producto) setImagenPrincipal(producto.imagenes[0]);
   }, [producto]);
 
+  // Lógica original: Permite añadir aunque no haya stock (para cotizar)
   const handleAdd = () => {
-    if (!isAdded && producto && producto.cantidadDisponible > 0) {
+    if (!isAdded && producto) {
       addToCart(producto);
     }
   };
@@ -55,7 +57,7 @@ const ProductDetail = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* GALERÍA */}
+        {/* SECCIÓN IZQUIERDA: GALERÍA + PRECIO */}
         <div className="space-y-6">
           <div className="relative w-full aspect-square bg-white border-2 border-black p-4 rounded-[30px] shadow-[8px_8px_0px_0px_#000000] flex items-center justify-center overflow-hidden">
             <img
@@ -63,6 +65,11 @@ const ProductDetail = () => {
               alt={producto.nombre}
               className="w-full h-full object-contain transition-all duration-300"
             />
+
+            {/* --- NUEVO PRECIO GRANDE (Estilo Neo-pop Rosa) --- */}
+            <div className="absolute bottom-4 right-4 bg-mun-pink text-white border-2 border-black px-5 py-2 rounded-xl font-black text-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10 animate-in zoom-in duration-300">
+              ${producto.precio}
+            </div>
           </div>
 
           <div className="flex gap-3 overflow-x-auto p-2 scrollbar-hide">
@@ -86,15 +93,16 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* INFORMACIÓN */}
+        {/* SECCIÓN DERECHA: INFO (Diseño Restaurado) */}
         <div className="space-y-6">
+          {/* Etiquetas */}
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-block bg-mun-pink text-white px-4 py-1 rounded-full text-[10px] font-black uppercase border-2 border-black shadow-[2px_2px_0px_0px_#000000]">
               {producto.categoria.replace("_", " ")}
             </span>
 
             {producto.masVendido && (
-              <div className="flex items-center gap-1 bg-yellow-300 border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000]">
+              <div className="flex items-center gap-1 bg-yellow-300 border-2 border-black px-3 py-1 rounded-full shadow-[2px_2px_0px_0px_#000000] animate-in zoom-in duration-300">
                 <Star size={14} className="fill-black text-black" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-black">
                   Top Ventas
@@ -107,7 +115,7 @@ const ProductDetail = () => {
             {producto.nombre}
           </h1>
 
-          {/* STATUS Y CANTIDAD BASADO EN DATA */}
+          {/* STATUS Y CANTIDAD (Restaurado a etiquetas separadas) */}
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
               <span
@@ -118,7 +126,6 @@ const ProductDetail = () => {
               </span>
             </div>
 
-            {/* Muestra la cantidad real de tu JSON */}
             {producto.cantidadDisponible > 0 && (
               <div className="flex items-center gap-2 bg-mun-pink/10 border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
                 <Package size={14} className="text-black" />
@@ -129,6 +136,7 @@ const ProductDetail = () => {
             )}
           </div>
 
+          {/* Cards de Info */}
           <div className="space-y-4">
             <div className="bg-white p-5 border-2 border-black rounded-2xl shadow-[4px_4px_0px_0px_#000000]">
               <h3 className="flex items-center gap-2 font-black uppercase text-xs mb-3 text-black tracking-widest">
@@ -150,17 +158,17 @@ const ProductDetail = () => {
             </div>
           </div>
 
+          {/* BOTÓN DE ACCIÓN (Restaurado: permite cotizar sin stock) */}
           <div className="relative pt-4">
             <button
               onClick={handleAdd}
-              disabled={isAdded || producto.cantidadDisponible <= 0}
+              disabled={isAdded}
               className={`w-full py-4 rounded-full font-black uppercase text-lg flex items-center justify-center gap-3 transition-all duration-200 border-2 border-black
                 ${
                   isAdded
                     ? "bg-gray-100 text-gray-400 shadow-none cursor-default translate-x-1 translate-y-1"
                     : "bg-mun-pink text-white shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:scale-95"
                 }
-                ${producto.cantidadDisponible <= 0 && !isAdded ? "opacity-50 grayscale cursor-not-allowed" : ""}
               `}
             >
               {isAdded ? (
@@ -169,10 +177,20 @@ const ProductDetail = () => {
                 </>
               ) : (
                 <>
-                  <ShoppingCart size={24} /> Cotizar Producto
+                  <ShoppingCart size={24} />
+                  {/* Únicamente la lógica de las palabras */}
+                  {producto.cantidadDisponible > 0
+                    ? "Añadir al Carrito"
+                    : "Cotizar Producto"}
                 </>
               )}
             </button>
+            {/* Mensaje opcional si no hay stock */}
+            {producto.cantidadDisponible <= 0 && !isAdded && (
+              <p className="text-[10px] font-black uppercase text-center mt-3 text-black/60 tracking-tighter">
+                * Producto bajo pedido. Sujeto a disponibilidad.
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ const Home = () => {
     { id: "todo_tipo", nombre: "Todo tipo" },
     { id: "piel_seca", nombre: "Piel Seca" },
     { id: "piel_grasa", nombre: "Piel Grasa" },
-    { id: "piel_sensible", nombre: "Sensible" },
+    { id: "piel_sensible", nombre: "Piel Sensible" },
     { id: "piel_acne", nombre: "Tratamiento para Acné" },
     { id: "protector_solar", nombre: "Protector Solar" },
     { id: "maquillaje", nombre: "Maquillaje" },
