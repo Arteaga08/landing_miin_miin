@@ -1,9 +1,10 @@
-import { useRef, useState, useEffect } from "react"; // Añadimos useEffect
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { productos } from "../../data/products";
 import { useCart } from "../../context/CartContext";
 import { Star, ChevronLeft, ChevronRight, Plus, Check } from "lucide-react";
 
+// Este componente ahora es visualmente idéntico a ProductCard
 const CarouselItem = ({ producto }) => {
   const { cart, addToCart } = useCart();
   const [showToast, setShowToast] = useState(false);
@@ -18,58 +19,66 @@ const CarouselItem = ({ producto }) => {
   };
 
   return (
-    <div className="min-w-70 max-w-70 md:min-w-75 md:max-w-75 snap-center shrink-0">
-      <div className="card-item bg-white border-2 border-black rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-col h-130">
+    // CAMBIO 1: Ajuste de anchos para que coincidan con una tarjeta estándar
+    // Mobile: 280px (más legible), Desktop: 320px
+    <div className="min-w-[280px] max-w-[280px] md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full">
+      {/* Estructura copiada exactamente de ProductCard para consistencia */}
+      <div className="group h-full bg-white border-2 border-black rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-col">
+        {/* Contenedor de Imagen con ASPECT-SQUARE (Igual que ProductCard) */}
         <Link
           to={`/producto/${producto.id}`}
-          className="block relative h-70 bg-white overflow-hidden border-b-2 border-black"
+          className="block relative aspect-square bg-white overflow-hidden border-b-2 border-black"
         >
           <img
             src={producto.imagenes?.[0]}
             alt={producto.nombre}
-            className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
           />
 
-          {/* Precio Rosa */}
+          {/* Precio Estilo Neo-pop */}
           <div className="absolute bottom-3 right-3 bg-mun-pink text-white border-2 border-black px-3 py-1 rounded-lg font-black text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-10">
             ${producto.precio}
           </div>
 
-          <span className="absolute top-3 left-3 bg-white border border-black px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors">
+          {/* Etiqueta Categoría */}
+          <span className="absolute top-3 left-3 bg-white border border-black px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:bg-mun-pink group-hover:text-white transition-colors">
             {producto.categoria.replace("_", " ")}
           </span>
 
+          {/* Etiqueta Top Ventas */}
           {producto.masVendido && (
-            <div className="absolute top-3 right-3 flex items-center gap-1 bg-yellow-300 border border-black px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-3 transition-transform">
+            <div className="absolute top-3 right-3 flex items-center gap-1 bg-yellow-300 border border-black px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-3 group-hover:rotate-0 transition-transform z-10">
               <Star size={10} className="fill-black text-black" />
-              <span className="text-[8px] font-black uppercase tracking-tighter">
+              <span className="text-[8px] font-black uppercase tracking-tighter text-black">
                 Top Ventas
               </span>
             </div>
           )}
         </Link>
 
+        {/* Información (Idéntico a ProductCard) */}
         <div className="p-5 flex flex-col grow">
-          <div className="mb-2 min-h-11">
+          <div className="flex justify-between items-start mb-2">
             <Link to={`/producto/${producto.id}`}>
-              <h3 className="font-black text-lg text-black uppercase leading-[1.1] hover:text-mun-pink transition-colors line-clamp-2">
+              <h3 className="font-black text-lg text-black uppercase leading-none hover:text-mun-pink transition-colors line-clamp-2">
                 {producto.nombre}
               </h3>
             </Link>
           </div>
-          <div className="min-h-8 mb-6">
-            <p className="text-gray-500 text-xs font-medium line-clamp-2 grow italic">
-              {producto.descripcionCorta}
-            </p>
-          </div>
 
+          <p className="text-gray-500 text-xs font-medium line-clamp-2 mb-6 grow italic">
+            {producto.descripcionCorta}
+          </p>
+
+          {/* Botones */}
           <div className="flex gap-2 w-full mt-auto">
             <Link
               to={`/producto/${producto.id}`}
-              className="grow flex items-center justify-center text-center bg-white border-2 border-black py-2.5 rounded-full font-black text-[10px] uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:bg-mun-pink hover:text-white active:bg-mun-pink active:text-white active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              className="grow flex items-center justify-center text-center bg-white border-2 border-black py-2.5 rounded-full font-black text-[10px] uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:bg-mun-pink hover:text-white active:bg-mun-pink active:text-white active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               Ver más
             </Link>
+
             <div className="relative flex items-center">
               {showToast && (
                 <div className="absolute -top-10 right-0 z-50 animate-bounce">
@@ -78,10 +87,18 @@ const CarouselItem = ({ producto }) => {
                   </div>
                 </div>
               )}
+
               <button
                 onClick={handleAdd}
                 disabled={isAdded}
-                className={`p-2 rounded-full border-2 border-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${isAdded ? "bg-gray-100 text-gray-400 shadow-none translate-x-px translate-y-px" : "bg-mun-pink text-white hover:bg-black active:shadow-none active:translate-x-px active:translate-y-px"}`}
+                className={`
+                  p-2 rounded-full border-2 border-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] 
+                  ${
+                    isAdded
+                      ? "bg-gray-100 text-gray-400 cursor-default shadow-none translate-x-px translate-y-px"
+                      : "bg-mun-pink text-white hover:bg-black active:shadow-none active:translate-x-px active:translate-y-px"
+                  }
+                `}
               >
                 {isAdded ? (
                   <Check size={20} strokeWidth={3} />
@@ -101,21 +118,16 @@ const BestSellersCarousel = () => {
   const scrollRef = useRef(null);
   const bestSellers = productos.filter((p) => p.masVendido);
 
-  // --- LÓGICA DE MEMORIA DE SCROLL ---
   useEffect(() => {
     const carousel = scrollRef.current;
     if (carousel) {
-      // 1. Recuperar la posición guardada al montar el componente
       const savedScroll = sessionStorage.getItem("carouselScrollPos");
       if (savedScroll) {
         carousel.scrollLeft = parseInt(savedScroll);
       }
-
-      // 2. Guardar la posición cada vez que el usuario hace scroll
       const handleScroll = () => {
         sessionStorage.setItem("carouselScrollPos", carousel.scrollLeft);
       };
-
       carousel.addEventListener("scroll", handleScroll);
       return () => carousel.removeEventListener("scroll", handleScroll);
     }
@@ -123,7 +135,8 @@ const BestSellersCarousel = () => {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 320;
+      // Ajustamos el scrollAmount al ancho de la tarjeta + gap
+      const scrollAmount = window.innerWidth < 768 ? 280 + 24 : 320 + 24;
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -132,8 +145,8 @@ const BestSellersCarousel = () => {
   };
 
   return (
-    <section className="relative pt-12 pb-12">
-      <div className="flex items-center gap-2 mb-8 px-4 md:px-0">
+    <section className="relative pt-12 pb-12 overflow-hidden">
+      <div className="flex items-center gap-2 mb-8 px-6 max-w-[1400px] mx-auto">
         <div className="bg-black p-1.5 rounded-lg shadow-[3px_3px_0px_0px_#EA8A8A]">
           <Star className="text-white fill-white" size={20} />
         </div>
@@ -142,25 +155,31 @@ const BestSellersCarousel = () => {
         </h3>
       </div>
 
-      <div className="relative px-4 md:px-0">
-        <div className="hidden md:block">
+      <div className="relative w-full">
+        {/* Botones de navegación (Desktop) */}
+        <div className="hidden md:block max-w-[1440px] mx-auto relative h-0">
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -left-2 top-[200px] z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronLeft size={24} strokeWidth={2.5} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -right-2 top-[200px] z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronRight size={24} strokeWidth={2.5} />
           </button>
         </div>
 
+        {/* CAMBIO 2: snap-mandatory
+            Esto obliga al scroll a detenerse exactamente en una tarjeta, 
+            evitando que el usuario haga swipe y pase 10 productos de golpe.
+        */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-8 px-2 -mx-2 snap-x scrollbar-thin scrollbar-thumb-[#EA8A8A] scrollbar-track-transparent"
+          className="flex gap-6 overflow-x-auto pb-10 px-6 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollBehavior: "smooth" }}
         >
           {bestSellers.map((producto) => (
             <CarouselItem key={producto.id} producto={producto} />
