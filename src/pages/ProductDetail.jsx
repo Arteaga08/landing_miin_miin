@@ -18,18 +18,31 @@ const ProductDetail = () => {
   const { cart, addToCart } = useCart();
 
   const producto = productos.find((p) => p.id === parseInt(id));
+
+  // --- FUNCIÓN DE SEGURIDAD (SANATIZE) ---
+  // Bloquea cualquier intento de inyectar scripts en lugar de URLs de imagen
+  const getSafeUrl = (url) => {
+    if (!url) return "";
+    const isSafe =
+      url.startsWith("http") ||
+      url.startsWith("/") ||
+      url.startsWith("./") ||
+      url.startsWith("blob:");
+    return isSafe ? url : "";
+  };
+
   const [imagenPrincipal, setImagenPrincipal] = useState(
-    producto?.imagenes?.[0],
+    getSafeUrl(producto?.imagenes?.[0]),
   );
 
-  // Lógica original: solo verifica si ya está añadido
   const isAdded = cart.some((item) => item.id === producto?.id);
 
   useEffect(() => {
-    if (producto) setImagenPrincipal(producto.imagenes[0]);
-  }, [producto]);
+    if (producto) {
+      setImagenPrincipal(getSafeUrl(producto.imagenes[0]));
+    }
+  }, [producto, id]);
 
-  // Lógica original: Permite añadir aunque no haya stock (para cotizar)
   const handleAdd = () => {
     if (!isAdded && producto) {
       addToCart(producto);
@@ -57,16 +70,17 @@ const ProductDetail = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* SECCIÓN IZQUIERDA: GALERÍA + PRECIO */}
+        {/* SECCIÓN IZQUIERDA: GALERÍA */}
         <div className="space-y-6">
           <div className="relative w-full aspect-square bg-white border-2 border-black p-4 rounded-[30px] shadow-[8px_8px_0px_0px_#000000] flex items-center justify-center overflow-hidden">
-            <img
-              src={imagenPrincipal}
-              alt={producto.nombre}
-              className="w-full h-full object-contain transition-all duration-300"
-            />
+            {imagenPrincipal && (
+              <img
+                src={imagenPrincipal}
+                alt={producto.nombre}
+                className="w-full h-full object-contain transition-all duration-300"
+              />
+            )}
 
-            {/* --- NUEVO PRECIO GRANDE (Estilo Neo-pop Rosa) --- */}
             <div className="absolute bottom-4 right-4 bg-mun-pink text-white border-2 border-black px-5 py-2 rounded-xl font-black text-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10 animate-in zoom-in duration-300">
               ${producto.precio}
             </div>
@@ -76,15 +90,15 @@ const ProductDetail = () => {
             {producto.imagenes.map((img, index) => (
               <button
                 key={index}
-                onClick={() => setImagenPrincipal(img)}
+                onClick={() => setImagenPrincipal(getSafeUrl(img))}
                 className={`shrink-0 w-24 h-24 rounded-2xl border-2 overflow-hidden bg-white transition-all ${
-                  imagenPrincipal === img
+                  imagenPrincipal === getSafeUrl(img)
                     ? "border-mun-pink scale-105 shadow-[4px_4px_0px_0px_#000000]"
                     : "border-black/10 hover:border-black"
                 }`}
               >
                 <img
-                  src={img}
+                  src={getSafeUrl(img)}
                   alt={`${producto.nombre} ${index}`}
                   className="w-full h-full object-cover"
                 />
@@ -93,9 +107,8 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* SECCIÓN DERECHA: INFO (Diseño Restaurado) */}
+        {/* SECCIÓN DERECHA: INFO */}
         <div className="space-y-6">
-          {/* Etiquetas */}
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-block bg-mun-pink text-white px-4 py-1 rounded-full text-[10px] font-black uppercase border-2 border-black shadow-[2px_2px_0px_0px_#000000]">
               {producto.categoria.replace("_", " ")}
@@ -115,7 +128,6 @@ const ProductDetail = () => {
             {producto.nombre}
           </h1>
 
-          {/* STATUS Y CANTIDAD (Restaurado a etiquetas separadas) */}
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-2 bg-white border-2 border-black px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#000000]">
               <span
@@ -136,7 +148,6 @@ const ProductDetail = () => {
             )}
           </div>
 
-          {/* Cards de Info */}
           <div className="space-y-4">
             <div className="bg-white p-5 border-2 border-black rounded-2xl shadow-[4px_4px_0px_0px_#000000]">
               <h3 className="flex items-center gap-2 font-black uppercase text-xs mb-3 text-black tracking-widest">
@@ -158,7 +169,6 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* BOTÓN DE ACCIÓN (Restaurado: permite cotizar sin stock) */}
           <div className="relative pt-4">
             <button
               onClick={handleAdd}
@@ -178,14 +188,12 @@ const ProductDetail = () => {
               ) : (
                 <>
                   <ShoppingCart size={24} />
-                  {/* Únicamente la lógica de las palabras */}
                   {producto.cantidadDisponible > 0
                     ? "Añadir al Carrito"
                     : "Cotizar Producto"}
                 </>
               )}
             </button>
-            {/* Mensaje opcional si no hay stock */}
             {producto.cantidadDisponible <= 0 && !isAdded && (
               <p className="text-[10px] font-black uppercase text-center mt-3 text-black/60 tracking-tighter">
                 * Producto bajo pedido. Sujeto a disponibilidad.
