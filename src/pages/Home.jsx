@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { productos } from "../data/products";
 import ProductCard from "../components/products/ProductCard";
 import BestSellersCarousel from "../components/home/BestSellersCarousel";
+import SubscriptionSection from "../components/home/SubscriptionSection";
 import { Search, X, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Home = () => {
@@ -62,6 +63,14 @@ const Home = () => {
       <BestSellersCarousel />
 
       {/* SEPARADOR ESTILIZADO */}
+      <div className="relative py-16 flex items-center justify-center">
+        <div className="absolute w-full h-0.5 bg-black/10"></div>
+        <div className="relative bg-white border-2 border-#EA8A8A px-6 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-black/40">
+          K-Beauty
+        </div>
+      </div>
+
+      <SubscriptionSection />
       <div className="relative py-16 flex items-center justify-center">
         <div className="absolute w-full h-0.5 bg-black/10"></div>
         <div className="relative bg-white border-2 border-#EA8A8A px-6 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-black/40">

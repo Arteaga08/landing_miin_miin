@@ -456,7 +456,7 @@ Su sistema de doble capa combina una capa de esencia calmante con una capa de po
       "https://res.cloudinary.com/dnppruwh4/image/upload/v1770952677/541e430dc60708a923107218bbaa338f_ngxrk8.jpg",
     ],
   },
-  -{
+  {
     id: 23,
     nombre: "Farm Stay - Collagen Water Full Moist Peeling Gel - 180ml",
     precio: 319,
@@ -519,7 +519,7 @@ hidrolizado
   {
     id: 26,
     nombre: "Mary&May - Tranexamic Acid + Glutathione Eye Cream - 12g",
-    precio: 299,
+    precio: 209,
     categoria: "todo_tipo",
     masVendido: true,
     descripcionCorta:
