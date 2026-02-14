@@ -21,7 +21,7 @@ const CarouselItem = ({ producto }) => {
     // CAMBIO 1: Agregamos 'snap-always' (o scrollSnapStop en style)
     // Esto obliga a que el scroll se detenga SIEMPRE en este elemento, uno por uno.
     <div
-      className="min-w-[280px] max-w-[280px] md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full"
+      className="min-w-70 max-w-70 md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full"
       style={{ scrollSnapStop: "always" }}
     >
       <div className="group h-full bg-white border-2 border-black rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-col">
@@ -157,7 +157,7 @@ const BestSellersCarousel = () => {
 
   return (
     <section className="relative pt-12 pb-12 overflow-hidden">
-      <div className="flex items-center gap-2 mb-8 px-6 max-w-[1400px] mx-auto">
+      <div className="flex items-center gap-2 mb-8 px-6 max-w-350 mx-auto">
         <div className="bg-black p-1.5 rounded-lg shadow-[3px_3px_0px_0px_#EA8A8A]">
           <Star className="text-white fill-white" size={20} />
         </div>
@@ -168,16 +168,16 @@ const BestSellersCarousel = () => {
 
       <div className="relative w-full">
         {/* Flechas Desktop */}
-        <div className="hidden md:block max-w-[1440px] mx-auto relative h-0">
+        <div className="hidden md:block max-w-360 mx-auto relative h-0">
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-2 top-[200px] z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -left-2 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronLeft size={24} strokeWidth={2.5} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-2 top-[200px] z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -right-2 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronRight size={24} strokeWidth={2.5} />
           </button>

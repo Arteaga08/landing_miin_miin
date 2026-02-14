@@ -243,7 +243,9 @@ The Real Noni Energy Repair Cream
   {
     id: 13,
     nombre: "Celimax - The Vita A Retinal Shot Tightening Booster - 15ml",
+    precio: 359,
     categoria: "todo_tipo",
+    masVendido: true,
     descripcionCorta:
       "Favorece la textura de la piel. Promueve la firmeza. Cuidado suave para la noche.",
     paraQueSirve:
