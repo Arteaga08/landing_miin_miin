@@ -1,10 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { productos } from "../../data/products";
 import { useCart } from "../../context/CartContext";
 import { Star, ChevronLeft, ChevronRight, Plus, Check } from "lucide-react";
 
-// Este componente ahora es visualmente idéntico a ProductCard
 const CarouselItem = ({ producto }) => {
   const { cart, addToCart } = useCart();
   const [showToast, setShowToast] = useState(false);
@@ -19,12 +18,13 @@ const CarouselItem = ({ producto }) => {
   };
 
   return (
-    // CAMBIO 1: Ajuste de anchos para que coincidan con una tarjeta estándar
-    // Mobile: 280px (más legible), Desktop: 320px
-    <div className="min-w-[280px] max-w-[280px] md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full">
-      {/* Estructura copiada exactamente de ProductCard para consistencia */}
+    // CAMBIO 1: Agregamos 'snap-always' (o scrollSnapStop en style)
+    // Esto obliga a que el scroll se detenga SIEMPRE en este elemento, uno por uno.
+    <div
+      className="min-w-[280px] max-w-[280px] md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full"
+      style={{ scrollSnapStop: "always" }}
+    >
       <div className="group h-full bg-white border-2 border-black rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-col">
-        {/* Contenedor de Imagen con ASPECT-SQUARE (Igual que ProductCard) */}
         <Link
           to={`/producto/${producto.id}`}
           className="block relative aspect-square bg-white overflow-hidden border-b-2 border-black"
@@ -35,17 +35,14 @@ const CarouselItem = ({ producto }) => {
             className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
           />
 
-          {/* Precio Estilo Neo-pop */}
           <div className="absolute bottom-3 right-3 bg-mun-pink text-white border-2 border-black px-3 py-1 rounded-lg font-black text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-10">
             ${producto.precio}
           </div>
 
-          {/* Etiqueta Categoría */}
           <span className="absolute top-3 left-3 bg-white border border-black px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:bg-mun-pink group-hover:text-white transition-colors">
             {producto.categoria.replace("_", " ")}
           </span>
 
-          {/* Etiqueta Top Ventas */}
           {producto.masVendido && (
             <div className="absolute top-3 right-3 flex items-center gap-1 bg-yellow-300 border border-black px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-3 group-hover:rotate-0 transition-transform z-10">
               <Star size={10} className="fill-black text-black" />
@@ -56,7 +53,6 @@ const CarouselItem = ({ producto }) => {
           )}
         </Link>
 
-        {/* Información (Idéntico a ProductCard) */}
         <div className="p-5 flex flex-col grow">
           <div className="flex justify-between items-start mb-2">
             <Link to={`/producto/${producto.id}`}>
@@ -70,7 +66,6 @@ const CarouselItem = ({ producto }) => {
             {producto.descripcionCorta}
           </p>
 
-          {/* Botones */}
           <div className="flex gap-2 w-full mt-auto">
             <Link
               to={`/producto/${producto.id}`}
@@ -118,16 +113,33 @@ const BestSellersCarousel = () => {
   const scrollRef = useRef(null);
   const bestSellers = productos.filter((p) => p.masVendido);
 
-  useEffect(() => {
+  // --- LÓGICA DE MEMORIA CORREGIDA (Sin saltos) ---
+  // Usamos useLayoutEffect para que ocurra ANTES de que el usuario vea el cambio
+  useLayoutEffect(() => {
     const carousel = scrollRef.current;
     if (carousel) {
       const savedScroll = sessionStorage.getItem("carouselScrollPos");
+
       if (savedScroll) {
+        // 1. Desactivamos temporalmente el scroll suave
+        carousel.style.scrollBehavior = "auto";
+        // 2. Saltamos INSTANTÁNEAMENTE a la posición
         carousel.scrollLeft = parseInt(savedScroll);
+
+        // 3. Reactivamos el scroll suave para que los botones funcionen bonito después
+        // Lo hacemos en un pequeño timeout para asegurar que el navegador ya procesó el salto
+        setTimeout(() => {
+          carousel.style.scrollBehavior = "smooth";
+        }, 50);
+      } else {
+        // Si no hay nada guardado, aseguramos smooth por defecto
+        carousel.style.scrollBehavior = "smooth";
       }
+
       const handleScroll = () => {
         sessionStorage.setItem("carouselScrollPos", carousel.scrollLeft);
       };
+
       carousel.addEventListener("scroll", handleScroll);
       return () => carousel.removeEventListener("scroll", handleScroll);
     }
@@ -135,7 +147,6 @@ const BestSellersCarousel = () => {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      // Ajustamos el scrollAmount al ancho de la tarjeta + gap
       const scrollAmount = window.innerWidth < 768 ? 280 + 24 : 320 + 24;
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
@@ -156,7 +167,7 @@ const BestSellersCarousel = () => {
       </div>
 
       <div className="relative w-full">
-        {/* Botones de navegación (Desktop) */}
+        {/* Flechas Desktop */}
         <div className="hidden md:block max-w-[1440px] mx-auto relative h-0">
           <button
             onClick={() => scroll("left")}
@@ -172,14 +183,11 @@ const BestSellersCarousel = () => {
           </button>
         </div>
 
-        {/* CAMBIO 2: snap-mandatory
-            Esto obliga al scroll a detenerse exactamente en una tarjeta, 
-            evitando que el usuario haga swipe y pase 10 productos de golpe.
-        */}
+        {/* CAMBIO 2: snap-mandatory + control de CSS */}
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto pb-10 px-6 snap-x snap-mandatory scrollbar-hide"
-          style={{ scrollBehavior: "smooth" }}
+          // 'scrollBehavior' se maneja dinámicamente en el useLayoutEffect
         >
           {bestSellers.map((producto) => (
             <CarouselItem key={producto.id} producto={producto} />
