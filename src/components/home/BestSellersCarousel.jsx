@@ -18,8 +18,6 @@ const CarouselItem = ({ producto }) => {
   };
 
   return (
-    // CAMBIO 1: Agregamos 'snap-always' (o scrollSnapStop en style)
-    // Esto obliga a que el scroll se detenga SIEMPRE en este elemento, uno por uno.
     <div
       className="min-w-70 max-w-70 md:min-w-[320px] md:max-w-[320px] snap-center shrink-0 h-full"
       style={{ scrollSnapStop: "always" }}
@@ -113,26 +111,18 @@ const BestSellersCarousel = () => {
   const scrollRef = useRef(null);
   const bestSellers = productos.filter((p) => p.masVendido);
 
-  // --- LÓGICA DE MEMORIA CORREGIDA (Sin saltos) ---
-  // Usamos useLayoutEffect para que ocurra ANTES de que el usuario vea el cambio
   useLayoutEffect(() => {
     const carousel = scrollRef.current;
     if (carousel) {
       const savedScroll = sessionStorage.getItem("carouselScrollPos");
 
       if (savedScroll) {
-        // 1. Desactivamos temporalmente el scroll suave
         carousel.style.scrollBehavior = "auto";
-        // 2. Saltamos INSTANTÁNEAMENTE a la posición
         carousel.scrollLeft = parseInt(savedScroll);
-
-        // 3. Reactivamos el scroll suave para que los botones funcionen bonito después
-        // Lo hacemos en un pequeño timeout para asegurar que el navegador ya procesó el salto
         setTimeout(() => {
           carousel.style.scrollBehavior = "smooth";
         }, 50);
       } else {
-        // Si no hay nada guardado, aseguramos smooth por defecto
         carousel.style.scrollBehavior = "smooth";
       }
 
@@ -156,7 +146,9 @@ const BestSellersCarousel = () => {
   };
 
   return (
-    <section className="relative pt-12 pb-12 overflow-hidden">
+    // CORRECCIÓN 1: Quitamos 'overflow-hidden' de aquí.
+    // Esto permite que las sombras de las tarjetas se vean completas y no se corten.
+    <section className="relative pt-12 pb-12">
       <div className="flex items-center gap-2 mb-8 px-6 max-w-350 mx-auto">
         <div className="bg-black p-1.5 rounded-lg shadow-[3px_3px_0px_0px_#EA8A8A]">
           <Star className="text-white fill-white" size={20} />
@@ -167,27 +159,27 @@ const BestSellersCarousel = () => {
       </div>
 
       <div className="relative w-full">
-        {/* Flechas Desktop */}
         <div className="hidden md:block max-w-360 mx-auto relative h-0">
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-2 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -left-16 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronLeft size={24} strokeWidth={2.5} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-2 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
+            className="absolute -right-16 top-50 z-20 bg-white border-2 border-black p-3 rounded-full hover:scale-110 hover:bg-mun-pink hover:text-white transition-all shadow-sm"
           >
             <ChevronRight size={24} strokeWidth={2.5} />
           </button>
         </div>
 
-        {/* CAMBIO 2: snap-mandatory + control de CSS */}
+        {/* CORRECCIÓN 2: Cambiamos 'pb-10' por 'py-10'.
+            Esto agrega padding ARRIBA y abajo dentro del área de scroll,
+            para que la sombra superior o el borde no choquen con el límite. */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-10 px-6 snap-x snap-mandatory scrollbar-hide"
-          // 'scrollBehavior' se maneja dinámicamente en el useLayoutEffect
+          className="flex gap-6 overflow-x-auto py-10 px-6 snap-x snap-mandatory scrollbar-hide"
         >
           {bestSellers.map((producto) => (
             <CarouselItem key={producto.id} producto={producto} />
